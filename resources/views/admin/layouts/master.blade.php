@@ -208,6 +208,30 @@
                 <span class="menu-title">manage brand</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.division.create')}}">
+                <i class="menu-icon typcn typcn-user-outline"></i>
+                <span class="menu-title">create division</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.division.manage')}}">
+                <i class="menu-icon typcn typcn-user-outline"></i>
+                <span class="menu-title">manage division</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.district.create')}}">
+                <i class="menu-icon typcn typcn-user-outline"></i>
+                <span class="menu-title">create district</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('admin.district.manage')}}">
+                <i class="menu-icon typcn typcn-user-outline"></i>
+                <span class="menu-title">manage district</span>
+              </a>
+            </li>
 
             <li class="nav-item">
               <a class="btn btn-secondary ml-4 mt-5" href="{{route('index')}}">
