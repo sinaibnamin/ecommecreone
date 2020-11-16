@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-
+  <div class="row">
 
   <h2 class="text-info" > All Brand List</h2>
   <hr>
@@ -24,6 +24,7 @@
 
 
   </div>
+</div>
 </div>
 
 

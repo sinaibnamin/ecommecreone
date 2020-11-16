@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+    <div class="row">
 <div class="col-md-3">
 @include('partials.product-sidebar')
 </div>
@@ -19,5 +20,6 @@
    </p>
 
 
+</div>
 </div>
 @endsection

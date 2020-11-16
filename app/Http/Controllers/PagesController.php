@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 use App\Brand;
+use DB;
 
 class PagesController extends Controller
 {
@@ -42,8 +43,14 @@ class PagesController extends Controller
 
       $products = Product::where('title','like','%'.$request->search.'%')
       ->orwhere('description','like','%'.$request->search.'%')
-
+      ->orWhereHas('brand', function($qry) use ($request){
+        $qry->where('name','like','%'.$request->search.'%');
+      })
+      ->orWhereHas('category', function($qry) use ($request){
+        $qry->where('name','like','%'.$request->search.'%');
+      })
       ->paginate(5);
+
 
       return view('pages.product.search',compact('products'));
     }
