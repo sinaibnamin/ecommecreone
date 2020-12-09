@@ -20,6 +20,14 @@ Route::get('/product/show/{id}', 'PagesController@productshow' )->name('product.
 Route::get('/product/category/{id}', 'PagesController@productcategory' )->name('product.category');
 Route::post('/product/search', 'PagesController@productsearch' )->name('product.search');
 
+
+
+// user route
+Route::get('/token/{token}', 'VerificationController@verify' )->name('user.verification');
+
+
+
+
 Route::group(['prefix'=>'admin'],function(){
   Route::get('/', 'AdminPagesController@index' )->name('admin.index');
   // product route

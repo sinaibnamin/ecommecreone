@@ -7,9 +7,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use App\Division;
+use App\District;
+use App\Notifications\VerifyRegistration;
+use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
+
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -28,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -40,6 +45,13 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+      $districts = District::all();
+      $divisions = Division::all();
+        return view('auth.register',compact('districts','divisions'));
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,9 +61,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|confirmed',
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'phone' => 'required',
+            'street_address' => 'required|string',
         ]);
     }
 
@@ -61,12 +79,26 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function register(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'username' => str_slug($request->first_name.$request->last_name) ,
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'phone' => $request->phone,
+            'street_address' => $request->street_address,
+            'ip_address' => request()->ip(),
+            'password' => Hash::make($request->password),
+            'remember_token' => str_random(20),
+            'status' => 0,
         ]);
+        $user->notify(new VerifyRegistration($user, $user->remember_token));
+        return back('/');
+
+
+
     }
 }

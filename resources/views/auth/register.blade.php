@@ -43,7 +43,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <input  type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
+                                <input type="number" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
 
                                 @if ($errors->has('phone'))
                                     <span class="invalid-feedback" role="alert">
@@ -69,7 +69,7 @@
                             <label for="street_address" class="col-md-4 col-form-label text-md-right">{{ __('street_address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="street_address" type="street_address" class="form-control{{ $errors->has('street_address') ? ' is-invalid' : '' }}" name="street_address" value="{{ old('street_address') }}" required>
+                                <input  type="text" class="form-control{{ $errors->has('street_address') ? ' is-invalid' : '' }}" name="street_address" value="{{ old('street_address') }}" required>
 
                                 @if ($errors->has('street_address'))
                                     <span class="invalid-feedback" role="alert">
@@ -80,10 +80,36 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="division" class="col-md-4 col-form-label text-md-right">{{ __('Division') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="division_id">
+                                  @foreach ($divisions as $division)
+                                      <option value="{{$division->id}}">{{$division->name}}</option>
+                                  @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="district" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="district_id">
+                                  @foreach ($districts as $district)
+                                      <option value="{{$district->id}}">{{$district->name}}</option>
+                                  @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                <input  type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
